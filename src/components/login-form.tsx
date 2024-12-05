@@ -64,7 +64,9 @@ export function LoginForm() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast.success(data.data.message);
+        if (data.status == 200) {
+          toast.success("Connexion reussi!");
+      }
         router.push("/");
       })
       .catch((err) => {

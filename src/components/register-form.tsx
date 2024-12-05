@@ -70,7 +70,9 @@ export function RegisterForm() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast.success(data.message);
+        if (data.status == 200) {
+          toast.success("Enregistrement effectuer avec succes!!");
+      }
         router.push("/login");
       })
       .catch((err) => {

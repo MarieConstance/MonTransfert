@@ -47,7 +47,7 @@ export function TransactionForm() {
     defaultValues: {
       name: "",
       phone_num: "",
-      amount: 0,
+      amount: "0",
     },
   });
 
@@ -82,11 +82,11 @@ export function TransactionForm() {
   }
   return (
     <>
-    <div className="max-w-7xl mx-auto p-10">
-      {/* Titre et bouton */}
+    <div className="max-w-7xl mx-auto p-15">
+      {/* Titre */}
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-4xl font-bold text-blue-600 drop-shadow-md font-serif">
-          BIENVENUE SUR MONEYPATH
+          BIENVENUE SUR MonTransfert
         </h1>
         <h2 className="text-2xl font-bold text-blue-600 drop-shadow-md font-serif">
           Votre Application de transfert d'argent sécurisé 
