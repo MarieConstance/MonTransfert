@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import {
   Card,
   CardContent,
@@ -26,19 +24,19 @@ import {
   FormMessage,
 } from "./ui/form";
 const transactionSchema = z.object({
-    name: z.string({
-        message: "champ obligatoire",
-      }),
-      phone_num: z
+  name: z.string({
+    message: "champ obligatoire",
+  }),
+  phone_num: z
     .string({
       message: "champ obligatoire",
-    }).max(10,{
-        message: "le numéro doit contenir 10 chiffres"
+    })
+    .max(10, {
+      message: "le numéro doit contenir 10 chiffres",
     }),
   amount: z.string().min(3, {
     message: "le montant doit contenir au moins 3 chiffres",
   }),
- 
 });
 export function TransactionForm() {
   const router = useRouter();
@@ -64,16 +62,16 @@ export function TransactionForm() {
       body: JSON.stringify({
         name,
         phone_num,
-        amount:Number(amount)
+        amount: Number(amount),
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.status == 200) {
-            toast.success("Votre transaction à été effectué avec sucess!!");
+          toast.success("Votre transaction à été effectué avec sucess!!");
+          router.refresh();
         }
-        router.refresh();
       })
       .catch((err) => {
         toast.error(err.message);
@@ -82,78 +80,80 @@ export function TransactionForm() {
   }
   return (
     <>
-    <div className="max-w-7xl mx-auto p-15">
-      {/* Titre */}
-      <div className="flex flex-col items-center gap-4">
-        <h1 className="text-4xl font-bold text-blue-600 drop-shadow-md font-serif">
-          BIENVENUE SUR MonTransfert
-        </h1>
-        <h2 className="text-2xl font-bold text-blue-600 drop-shadow-md font-serif">
-          Votre Application de transfert d'argent sécurisé 
-        </h2>
+      <div className="max-w-7xl mx-auto p-15">
+        {/* Titre */}
+        <div className="flex flex-col items-center gap-4 mr-10">
+          <h1 className="text-4xl font-bold text-blue-600 drop-shadow-md font-serif">
+            BIENVENUE SUR MonTransfert
+          </h1>
+          <h2 className="text-2xl font-bold text-blue-600 drop-shadow-md font-serif">
+            Votre Application de transfert d'argent sécurisé
+          </h2>
+        </div>
       </div>
-    </div>
-    <Card className="mx-auto max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">Transfert</CardTitle>
-        <CardDescription>
-          Entrer les informations du destinataire
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>NomUtilisateur</FormLabel>
-                  <FormControl>
-                    <Input type="text" placeholder="marieGoa" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      <Card className="mx-auto max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Transfert</CardTitle>
+          <CardDescription>
+            Entrer les informations du destinataire
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>NomUtilisateur</FormLabel>
+                    <FormControl>
+                      <Input type="text" placeholder="marieGoa" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="phone_num"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Numéro du destinataire</FormLabel>
-                  <FormControl>
-                    <Input  placeholder="010101" {...field} />
-                  </FormControl>
+              <FormField
+                control={form.control}
+                name="phone_num"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Numéro du destinataire</FormLabel>
+                    <FormControl>
+                      <Input placeholder="010101" {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="amount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Montant à envoyer</FormLabel>
-                  <FormControl>
-                    <Input type="tel" placeholder="200000" {...field} />
-                  </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Montant à envoyer en FCFA</FormLabel>
+                    <FormControl>
+                      <Input type="tel" placeholder="200000" {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <Button type="submit" className="w-full">
-              Envoyer
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+              <Button
+                type="submit"
+                className="w-full mt-4 bg-blue-500 hover:bg-blue-700 text-white"
+              >
+                Envoyer
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </>
-    
   );
 }

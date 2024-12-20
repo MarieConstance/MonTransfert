@@ -66,8 +66,8 @@ export function LoginForm() {
         console.log(data);
         if (data.status == 200) {
           toast.success("Connexion reussi!");
-      }
-        router.push("/");
+        }
+        router.push("/transaction");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -114,9 +114,18 @@ export function LoginForm() {
               )}
             />
 
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full mt-4 bg-blue-500 hover:bg-blue-700 text-white"
+            >
               Connexion
             </Button>
+            <p className="mt-4 text-sm text-center">
+              Vousn'avez pas de compte ?{" "}
+              <Link href="/register" className="text-blue-500 underline">
+                S'inscrire
+              </Link>
+            </p>
           </form>
         </Form>
       </CardContent>

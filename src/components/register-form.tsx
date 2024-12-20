@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import {
   Card,
   CardContent,
@@ -14,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
@@ -72,7 +71,7 @@ export function RegisterForm() {
         console.log(data);
         if (data.status == 200) {
           toast.success("Enregistrement effectuer avec succes!!");
-      }
+        }
         router.push("/login");
       })
       .catch((err) => {
@@ -91,7 +90,7 @@ export function RegisterForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
+            <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
@@ -133,11 +132,19 @@ export function RegisterForm() {
                 </FormItem>
               )}
             />
-           
 
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full mt-4 bg-blue-500 hover:bg-blue-700 text-white"
+            >
               S'inscrire
             </Button>
+            <p className="mt-4 text-sm text-center">
+              Avez-vous déjà un compte ?{" "}
+              <Link href="/login" className="text-blue-500 underline">
+                Se connecter
+              </Link>
+            </p>
           </form>
         </Form>
       </CardContent>
